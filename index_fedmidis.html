@@ -988,7 +988,7 @@ function render(){
   // gráfico DI -> Jun -> Jul -> Ago
   $('trend-title').textContent='Evolución mensual del monitoreo de cloro en '+num(sch.length)+' II.EE.';
   const pts=[];
-  {const w=schGeo.filter(i=>di(i)!=null),ok=w.filter(i=>di(i)>=0.5).length; if(w.length) pts.push({m:'DI',v:ok/w.length*100,mi:'DI'});}  // nodo DI estático (solo geográfico)
+  {const w=sch.filter(i=>di(i)!=null),ok=w.filter(i=>di(i)>=0.5).length; if(w.length) pts.push({m:'DI',v:ok/w.length*100,mi:'DI'});}  // nodo DI sobre el MISMO grupo filtrado (cohorte consistente)
   for(let m=0;m<MES.length;m++){const w=sch.filter(i=>mesCum(i,m)!=null),ok=w.filter(i=>mesCum(i,m)>=0.5).length; if(w.length) pts.push({m:MES[m],v:ok/w.length*100,mi:m});}
   line('trend',pts,mi=>{state.mesSel=(state.mesSel===mi?null:mi);render();});
   if(state.mesSel==null){$('mesInfo').innerHTML='Vista actual: <b>estado a la fecha</b> (medición más baja del último mes)';$('mesClear').style.display='none';}
